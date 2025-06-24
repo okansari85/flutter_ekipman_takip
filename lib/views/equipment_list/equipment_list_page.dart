@@ -31,15 +31,19 @@ List<Equipment> get filteredList {
           .where((e) => e.category == selectedCategory)
           .toList();
 
-  // 👇 Burada sıralama yapılıyor
   filtered.sort((a, b) {
-    final aPast = a.daysLeft < 0;
-    final bPast = b.daysLeft < 0;
+    int getPriority(Equipment e) {
+      if (e.daysLeft < 0) return 0;        // Geçmiş
+      if (e.daysLeft <= 60) return 1;      // Yaklaşan
+      return 2;                            // Geçerli
+    }
 
-    if (aPast && !bPast) return 1;  // geçmişi sona at
-    if (!aPast && bPast) return -1;
+    int p1 = getPriority(a);
+    int p2 = getPriority(b);
 
-    return a.daysLeft.compareTo(b.daysLeft); // kalan gün küçük olan yukarı
+    if (p1 != p2) return p1.compareTo(p2); // Önce önceliğe göre sırala
+
+    return a.daysLeft.compareTo(b.daysLeft); // Eşitse gün sayısına göre sırala
   });
 
   return filtered;
