@@ -24,11 +24,25 @@ void initState() {
   }];
 }
 
- List<Equipment> get filteredList {
-  if (selectedCategory == 'Tümü') return dummyEquipments;
-  return dummyEquipments
-      .where((e) => e.category == selectedCategory)
-      .toList();
+List<Equipment> get filteredList {
+  List<Equipment> filtered = selectedCategory == 'Tümü'
+      ? dummyEquipments
+      : dummyEquipments
+          .where((e) => e.category == selectedCategory)
+          .toList();
+
+  // 👇 Burada sıralama yapılıyor
+  filtered.sort((a, b) {
+    final aPast = a.daysLeft < 0;
+    final bPast = b.daysLeft < 0;
+
+    if (aPast && !bPast) return 1;  // geçmişi sona at
+    if (!aPast && bPast) return -1;
+
+    return a.daysLeft.compareTo(b.daysLeft); // kalan gün küçük olan yukarı
+  });
+
+  return filtered;
 }
 
   @override

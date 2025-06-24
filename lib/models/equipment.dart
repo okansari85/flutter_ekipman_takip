@@ -1,3 +1,5 @@
+import 'package:flutter/material.dart';
+
 class Equipment {
   final String name;
   final String brand;
@@ -5,8 +7,6 @@ class Equipment {
   final String serialNumber;
   final DateTime inspectionDate;
   final String category;
-
-  /// Eklendi: Periyod gün cinsinden
   final int inspectionPeriodInDays;
 
   Equipment({
