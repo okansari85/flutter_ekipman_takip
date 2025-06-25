@@ -3,6 +3,7 @@ import '../../data/dummy_data.dart';
 import '../../models/equipment.dart';
 import '../../widgets/dropdown_category_filter.dart';
 import 'equipment_card.dart';
+import 'equipment_add_page.dart'; // Ekleme sayfasını import et
 
 class EquipmentListPage extends StatefulWidget {
   const EquipmentListPage({super.key});
@@ -77,6 +78,24 @@ List<Equipment> get filteredList {
           )
         ],
       ),
+      // 👇 Bu satırı buraya ekle
+        floatingActionButton: FloatingActionButton(
+          onPressed: () async {
+            final result = await Navigator.push(
+              context,
+              MaterialPageRoute(
+                builder: (_) => const EquipmentAddPage(), // sayfanın import edildiğinden emin ol
+              ),
+            );
+
+            if (result is Equipment) {
+              setState(() {
+                dummyEquipments.add(result);
+              });
+            }
+          },
+          child: const Icon(Icons.add),
+        ),
     );
   }
 }
