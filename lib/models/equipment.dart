@@ -1,4 +1,7 @@
 import 'package:flutter/material.dart';
+import 'equipment_history.dart';
+
+
 
 class Equipment {
   final String name;
@@ -8,6 +11,9 @@ class Equipment {
   final DateTime inspectionDate;
   final String category;
   final int inspectionPeriodInDays;
+  final String imageUrl; 
+  final List<EquipmentHistory> history;
+
 
   Equipment({
     required this.name,
@@ -17,6 +23,8 @@ class Equipment {
     required this.inspectionDate,
     required this.category,
     this.inspectionPeriodInDays = 365, // Varsayılan 1 yıl
+    this.imageUrl = '',
+    required this.history,
   });
 
   /// Periyot son tarihi

@@ -94,15 +94,15 @@ class _EquipmentAddPageState extends State<EquipmentAddPage> {
                 onPressed: () {
                   if (_formKey.currentState!.validate() && inspectionDate != null) {
                     final newEquipment = Equipment(
-                      name: nameController.text,
-                      brand: brandController.text,
-                      model: modelController.text,
-                      serialNumber: serialController.text,
-                      category: selectedCategory,
-                      inspectionDate: inspectionDate!,
-                      inspectionPeriodInDays: int.tryParse(periodController.text) ?? 365,
-              
-                    );
+                    name: nameController.text,
+                    brand: brandController.text,
+                    model: modelController.text,
+                    serialNumber: serialController.text,
+                    category: selectedCategory,
+                    inspectionDate: inspectionDate!,
+                    inspectionPeriodInDays: int.tryParse(periodController.text) ?? 365,
+                    history: [], // ✅ bu satırı ekle
+                  );
 
                     Navigator.pop(context, newEquipment);
                   } else {
